@@ -21,7 +21,13 @@ This project is aimed to discover cities and know the diffrent locations in it.
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 1-Mohmmad Al selwide 2-Balqees Al-fasatleh.
- 
+
+-----------------------------------------
+
+## lab 06 whiteboard
+
+ ![lab06](src/img/Screenshot_440.png)
+
 -----------------------------------------
 Name of feature: 1. Set up MY React repository & API keys.
 
