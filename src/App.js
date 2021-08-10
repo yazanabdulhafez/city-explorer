@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-// dotenv.config();
- let tokenKey=`${process.env.MY_Access_Token}`
-  console.log(tokenKey);
  
 export class App extends Component {
   
