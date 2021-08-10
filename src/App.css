@@ -9,12 +9,12 @@ header h1 {
 }
 
 main {
-  height: 600px;
+  height: 1000px;
   background-color: cadetblue;
 }
 
 main section {
-  margin-left: 41%;
+  margin-left: 5%;
 }
 
 h2 {
@@ -24,14 +24,42 @@ h2 {
   align-items: center;
 }
 
+.firstCol {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.secondCol {
+  padding-top: 60px;
+  width: 60%;
+  margin-left: 60px;
+}
+
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(143, 158, 226);
+  background-color: rgb(20, 21, 26);
+  color: aliceblue;
+  font-size: 1.5rem;
+  height: 10vw;
+}
+
+footer p {
+  margin: auto;
 }
 
 .map {
-  height: 300px;
-  width: 400px;
+  object-fit: fill;
 }
+
+
+/* .flex {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */

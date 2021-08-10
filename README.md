@@ -14,9 +14,12 @@ This project is aimed to discover cities and know the diffrent locations in it.
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Change Log
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+08-08-2021 8:00pm - Application now has a fully-functional to show the map
+10-08-2021 8:00pm - Application now has a fully-functional to get data from local API
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
@@ -74,3 +77,27 @@ Start time: 8/8/2021 - 3:30
 Finish time: 8/8/2021 - 6:30
 
 Actual time needed to complete:3 hours
+
+-----------------------------------------
+
+Name of feature: 5. get the weather data
+
+Estimate of time needed to complete: 30 min
+
+Start time: 10/8/2021 - 5:30
+
+Finish time: 10/8/2021 - 6:30
+
+Actual time needed to complete:1hours
+
+-----------------------------------------
+
+Name of feature: 6.handle the errors from backend
+
+Estimate of time needed to complete: 30 min
+
+Start time: 10/8/2021 - 6:30
+
+Finish time: 10/8/2021 - 8:30
+
+Actual time needed to complete:2 hours
