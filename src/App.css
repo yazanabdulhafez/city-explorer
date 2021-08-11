@@ -9,7 +9,7 @@ header h1 {
 }
 
 main {
-  height: 1000px;
+  height: fit-content;
   background-color: cadetblue;
 }
 
