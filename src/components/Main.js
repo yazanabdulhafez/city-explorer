@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import City from './City';
 import axios from 'axios';
 import Map from './Map';
+import Movies from './Movies';
 import { Form, Alert, Card, Button, Row, Col } from 'react-bootstrap';
 import Weather from './Weather'
 require('dotenv').config();
@@ -21,7 +22,9 @@ export class Main extends Component {
       warningDisplay: false,
       display: false,
       displyWeather: true,
-      weatherData: []
+      weatherData: [],
+      moviesData:[],
+      displayMovies:false
     }
   }
 
@@ -50,36 +53,27 @@ export class Main extends Component {
         warningDisplay: false
 
       })
-      // console.log(this.state.lon);
-      // console.log(this.state.lat);
-      // console.log(this.state.cityName);
-      let axiosLocalData = axios.get(`http://localhost:${process.env.REACT_APP_PORT}/weather?searchQuery=${this.state.cityName}&lon=${this.state.lon}&lat=${this.state.lat}`)
-        .then(res => {
-          console.log(axiosLocalData);
-          console.log(res.data);
-          if (res.data !== `cant found ${this.state.cityName} use (Amman,Paris,Seattle)`) {
+      let mapUrl='http://localhost:8000/weather?key=81800f30dd4e4fc4801159eab53edc25&lat=31.95522&lon= 35.94503';
+       axios.get(mapUrl).then(res => {
             this.setState({
               displyWeather: true,
               weatherData: res.data,
               warningDisplay: false
             });
-          }
-          else {
-            this.setState({
-              warning: `${res.data} `,
-              displyWeather: false,
-              display: false,
-              warningDisplay: true
-            })
-
-          }
-        }
-        );
-
+          });
+          let movieUrl='http://localhost:8000/movies?api_key=1dcf83331301e64bda3cf78fd359f8ce&city=amman';
+          axios.get(movieUrl).then(res => {
+            console.log(res);
+               this.setState({
+                 displyMovies: true,
+                 moviesData: res.data,
+                 warningDisplay: false
+               });
+             });
     }).catch(err => {
       console.log(err);
       this.setState({
-        warning: `${err},please enter vaild city name`,
+        warning: `${err.massage},please enter vaild city name`,
         display: false,
         warningDisplay: true
       })
@@ -119,6 +113,26 @@ export class Main extends Component {
                   this.state.weatherData.map((Element, index) => (
                     <Weather key={index} description={Element.description}
                       date={Element.date} />
+                  ))
+                }
+              </div>
+            </Col>
+          </Row>
+          <Row>
+          <Col className='secondCol'>
+              <div className='flex'>
+                {
+                  this.state.displyMovies &&
+                  this.state.moviesData.map((Element, index) => (
+                    <Movies key={index}  
+                    title={Element.title} 
+                    overview = {Element.overview}
+                    average_vote ={Element.average_vote}
+                    total_votes = {Element.total_votes}
+                    image_url = {Element.image_url}
+                    popularity = {Element.popularity}
+                    released_on ={Element.released_on}
+                    />
                   ))
                 }
               </div>
