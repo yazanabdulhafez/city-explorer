@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap'
+import React, { Component } from 'react';
+import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
 export class Header extends Component {
   render() {
     return (
@@ -23,7 +23,7 @@ export class Header extends Component {
             <Nav>
               <Nav.Link href="#deets">Test</Nav.Link>
               <Nav.Link eventKey={2} href="#memes">
-              Test
+                Test
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

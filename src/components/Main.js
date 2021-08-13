@@ -1,17 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import City from './City';
 import axios from 'axios';
 import Map from './Map';
 import Movies from './Movies';
-import { Form, Alert, Card, Button, Row, Col } from 'react-bootstrap';
-import Weather from './Weather'
-require('dotenv').config();
+import CityForm from './CityForm';
+import { Container, ListGroup, Alert, Card, Row, Col } from 'react-bootstrap';
+import Weather from './Weather';
+
+require( 'dotenv' ).config();
 const key = process.env.REACT_APP_ACCESS_TOKEN;
 
 
 export class Main extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
 
     this.state = {
       lat: '0.0',
@@ -21,30 +23,30 @@ export class Main extends Component {
       warning: '',
       warningDisplay: false,
       display: false,
-      displyWeather: true,
+      displyWeather: false,
       weatherData: [],
-      moviesData:[],
-      displayMovies:false
-    }
+      moviesData: [],
+      displayMovies: false
+    };
   }
 
-  getUserInputHandler = (e) => {
-    this.setState({
+  getUserInputHandler = ( e ) => {
+    this.setState( {
       cityName: e.target.value
-    })
-    console.log(this.state.cityName);
+    } );
+    console.log( this.state.cityName );
   }
 
-  submitHandler = (e) => {
+  submitHandler = ( e ) => {
     e.preventDefault();
-    console.log('res');
-    let url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${this.state.cityName}&format=json`
-    axios.get(url).then(res => {
-      let data = res.data[0]
-      console.log(res);
+    console.log( 'res' );
+    let url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${this.state.cityName}&format=json`;
+    axios.get( url ).then( res => {
+      let data = res.data[0];
+      console.log( res );
 
 
-      this.setState({
+      this.setState( {
         cityDescription: data.display_name,
         lat: data.lat,
         lon: data.lon,
@@ -52,32 +54,34 @@ export class Main extends Component {
         warning: '',
         warningDisplay: false
 
-      })
-      let mapUrl='http://localhost:8000/weather?key=81800f30dd4e4fc4801159eab53edc25&lat=31.95522&lon= 35.94503';
-       axios.get(mapUrl).then(res => {
-            this.setState({
-              displyWeather: true,
-              weatherData: res.data,
-              warningDisplay: false
-            });
-          });
-          let movieUrl='http://localhost:8000/movies?api_key=1dcf83331301e64bda3cf78fd359f8ce&city=amman';
-          axios.get(movieUrl).then(res => {
-            console.log(res);
-               this.setState({
-                 displyMovies: true,
-                 moviesData: res.data,
-                 warningDisplay: false
-               });
-             });
-    }).catch(err => {
-      console.log(err);
-      this.setState({
+      } );
+      let mapUrl = `https://city-explorer-apiapp.herokuapp.com/weather?${process.env.REACT_APP_WEATHER_API_KEY}&lat=${this.state.lat}&lon=${this.state.lon}`;
+      axios.get( mapUrl ).then( res => {
+        this.setState( {
+          displyWeather: true,
+          weatherData: res.data,
+          warningDisplay: false
+        } );
+      } );
+      let movieUrl = `https://city-explorer-apiapp.herokuapp.com/movies?api_key=1dcf83331301e64bda3cf78fd359f8ce&city=${this.state.cityName}`;
+      axios.get( movieUrl ).then( res => {
+        console.log( res );
+        this.setState( {
+          displayMovies: true,
+          moviesData: res.data,
+          warningDisplay: false
+        } );
+      } );
+    } ).catch( err => {
+      console.log( err );
+      this.setState( {
         warning: `${err.massage},please enter vaild city name`,
         display: false,
+        displyWeather: false,
+        displayMovies: false,
         warningDisplay: true
-      })
-    });
+      } );
+    } );
 
   }
   render() {
@@ -86,59 +90,48 @@ export class Main extends Component {
         {this.state.warningDisplay && <Alert style={{ width: '80rem', margin: 'auto' }} variant='danger'>
           <h2 bg='warning'>{this.state.warning}</h2>
         </Alert>}
-        <section>
-          <Row>
+
+        <Container>
+          <Row >
             <Col className='firstCol'>
-              <Form className='form' onSubmit={(e) => this.submitHandler(e)}>
-                <Row >
-                  <Col xs="auto" className="my-1">
-                    <Form.Control size='lg' type="text" onChange={(e) => { this.getUserInputHandler(e) }} placeholder="search by City name" />
-                  </Col>
-                  <Col xs="auto" className="my-1">
-                    <Button size='lg' type="submit">Explore!</Button>
-                  </Col>
-                </Row>
-              </Form>
+              <CityForm getUserInputHandler={this.getUserInputHandler} submitHandler={this.submitHandler} />
               {this.state.display && <Card>
                 <City display={this.state.display} cityName={this.state.cityDescription} lat={this.state.lat} lon={this.state.lon} />
               </Card>}
-              {this.state.display && <Card style={{ height: '300px' }} className='flex'>
+              {this.state.display && <Card style={{ height: '450px' }} className='flex'>
                 <Map display={this.state.display} lat={this.state.lat} lon={this.state.lon} />
               </Card>}
             </Col>
+
+
             <Col className='secondCol'>
-              <div className='flex'>
-                {
-                  this.state.displyWeather &&
-                  this.state.weatherData.map((Element, index) => (
-                    <Weather key={index} description={Element.description}
-                      date={Element.date} />
-                  ))
-                }
-              </div>
+
+              {
+                this.state.displyWeather && <div>
+
+                  <ListGroup style={{ width: '80%', margin: 'Auto', textAlign: 'center' }}>
+                    <h5 style={{ textAlign: 'center' }}> WEATHER DETAILS</h5>
+                    <Weather weatherData={this.state.weatherData} />
+                  </ListGroup>
+                </div>
+              }
+
             </Col>
           </Row>
-          <Row>
-          <Col className='secondCol'>
-              <div className='flex'>
-                {
-                  this.state.displyMovies &&
-                  this.state.moviesData.map((Element, index) => (
-                    <Movies key={index}  
-                    title={Element.title} 
-                    overview = {Element.overview}
-                    average_vote ={Element.average_vote}
-                    total_votes = {Element.total_votes}
-                    image_url = {Element.image_url}
-                    popularity = {Element.popularity}
-                    released_on ={Element.released_on}
-                    />
-                  ))
-                }
-              </div>
-            </Col>
-          </Row>
-        </section>
+        </Container>
+        <Row style={{ paddingTop: '100px', justifyContent: 'center', paddingBottom: '60px' }}>
+
+          {
+            this.state.displayMovies &&
+            this.state.moviesData.data.map( ( Element, index ) => (
+              <Movies key={index}
+                element={Element}
+              />
+            ) )
+          }
+        </Row>
+
+
 
       </main >
     );
