@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { Row, Card, Col } from 'react-bootstrap';
+import Movie from './Movie';
 
 export class Movies extends Component {
   render() {
     return (
-      <Card style={{ width: '25rem' }} bg='secondary' text='light' className='shadow mb-2' >
-        <Card.Body>
-          <Col>
-            <Row>Title: {this.props.title} </Row>
-            <Row> Overview: {this.props.overview}</Row>
-            <Row> Votes: {this.props.average_vote}</Row>
-            <Row>TotalVotes: {this.props.total_votes}</Row>
-            <Row> <img src={`https://image.tmdb.org/t/p/w500${this.props.image_url}`}  alt={this.props.title} /> </Row>
-            <Row>Popularity: {this.props.popularity}</Row>
-          </Col>
-        </Card.Body>
-      </Card>
+
+      <Movie
+
+        title={this.props.element.title}
+        overview={this.props.element.overview}
+        average_vote={this.props.element.average_vote}
+        total_votes={this.props.element.total_votes}
+        image_url={this.props.element.image_url}
+        popularity={this.props.element.popularity}
+        released_on={this.props.element.released_on}
+
+      />
 
     );
   }

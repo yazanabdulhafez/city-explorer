@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Card, Col } from 'react-bootstrap';
+import WeatherDay from './WeatherDay';
 
 export class Weather extends Component {
   render() {
     return (
-      <Card style={{ width: '25rem' }}  bg='secondary' text='light' className='shadow mb-2' >
-        <Card.Body>
-          <Col>
-            <Row>{this.props.date}</Row>
-            <Row>{'  '}</Row>
-            <Row>{this.props.description}</Row>
-          </Col>
-        </Card.Body>
-      </Card>
+      this.props.weatherData.data.map( ( Element, index ) => (
+        <WeatherDay key={index} description={Element.description}
+          date={Element.date} />
+      ) )
 
     );
   }

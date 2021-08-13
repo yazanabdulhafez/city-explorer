@@ -5,18 +5,20 @@ import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
- 
+
 export class App extends Component {
-  
+
   render() {
     return (
-     <>
-        <Header />
-       <Main />
-    <Footer />
-  </>
+      <div className='page-container'>
+        <div className='content-wrap'>
+          <Header />
+          <Main />
+        </div>
+        <Footer />
+      </div>
     )
   }
 }
 
-export default App
+export default App;
