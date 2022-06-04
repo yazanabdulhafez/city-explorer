@@ -39,11 +39,10 @@ export class Main extends Component {
 
   submitHandler = ( e ) => {
     e.preventDefault();
-    console.log( 'res' );
     let url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${this.state.cityName}&format=json`;
     axios.get( url ).then( res => {
       let data = res.data[0];
-      console.log( res );
+      console.log( res.data[0] );
 
 
       this.setState( {
