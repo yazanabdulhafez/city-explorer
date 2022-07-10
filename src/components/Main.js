@@ -6,6 +6,7 @@ import Movies from './Movies';
 import CityForm from './CityForm';
 import { Container, ListGroup, Alert, Card, Row, Col } from 'react-bootstrap';
 import Weather from './Weather';
+import '../App.css';
 
 require( 'dotenv' ).config();
 const key = process.env.REACT_APP_ACCESS_TOKEN;
@@ -23,7 +24,7 @@ export class Main extends Component {
       warning: '',
       warningDisplay: false,
       display: false,
-      displyWeather: false,
+      displayWeather: false,
       weatherData: [],
       moviesData: [],
       displayMovies: false
@@ -31,6 +32,7 @@ export class Main extends Component {
   }
 
   getUserInputHandler = ( e ) => {
+    e.preventDefault();
     this.setState( {
       cityName: e.target.value
     } );
@@ -57,7 +59,7 @@ export class Main extends Component {
       let mapUrl = `https://city-explorer-apiapp.herokuapp.com/weather?${process.env.REACT_APP_WEATHER_API_KEY}&lat=${this.state.lat}&lon=${this.state.lon}`;
       axios.get( mapUrl ).then( res => {
         this.setState( {
-          displyWeather: true,
+          displayWeather: true,
           weatherData: res.data,
           warningDisplay: false
         } );
@@ -74,9 +76,9 @@ export class Main extends Component {
     } ).catch( err => {
       console.log( err );
       this.setState( {
-        warning: `${err.massage},please enter vaild city name`,
+        warning: `${err.massage},please enter valid city name`,
         display: false,
-        displyWeather: false,
+        displayWeather: false,
         displayMovies: false,
         warningDisplay: true
       } );
@@ -85,7 +87,7 @@ export class Main extends Component {
   }
   render() {
     return (
-      <main>
+      <main id='home'>
         {this.state.warningDisplay && <Alert style={{ width: '80rem', margin: 'auto' }} variant='danger'>
           <h2 bg='warning'>{this.state.warning}</h2>
         </Alert>}
@@ -106,7 +108,7 @@ export class Main extends Component {
             <Col className='secondCol'>
 
               {
-                this.state.displyWeather && <div>
+                this.state.displayWeather && <div>
 
                   <ListGroup style={{ width: '80%', margin: 'Auto', textAlign: 'center' }}>
                     <h5 style={{ textAlign: 'center' }}> WEATHER DETAILS</h5>

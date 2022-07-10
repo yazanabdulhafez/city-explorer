@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './styles.sass';
 
 export class Footer extends Component {
   render() {
     return (
       <footer>
-        <p>&copy;Yazan Alkharabsheh</p>
+        <p>All rights reserved &copy;2022 </p>
+        <p>Yazan Alkharabsheh</p>
       </footer>
     );
   }

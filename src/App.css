@@ -1,3 +1,7 @@
+:root {
+  --header-height: 14vh;
+}
+
 .page-container {
   position: relative;
   min-height: 100vh;
@@ -8,27 +12,25 @@
   padding-bottom: 2.5rem;
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
+.header_navbar {
+  height: var(--header-height);
 }
 
-header h1 {
+.header_navbar h1 {
   margin-top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgb(143, 158, 226);
   margin-bottom: 0px;
-  height: 80px;
 }
 
 main {
-  height: max-content;
+  min-height: 70vh;
   box-sizing: 960px;
   margin: auto;
+  background-color: rgb(92, 70, 232);
+  overflow: hidden
 }
 
 h2 {
@@ -53,23 +55,6 @@ h2 {
 .secondCol {
   padding-top: 60px;
   width: 50%;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(20, 21, 26);
-  color: aliceblue;
-  font-size: 1.5rem;
-  height: 8vw;
-}
-
-footer p {
-  margin: auto;
 }
 
 .map {
