@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/Footer';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Contact from './components/Contact';
 
 
 
@@ -10,13 +16,16 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='page-container'>
-        <div className='content-wrap'>
-          <Header />
-          <Main />
-        </div>
+
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
         <Footer />
-      </div>
+      </Router>
+
     )
   }
 }
